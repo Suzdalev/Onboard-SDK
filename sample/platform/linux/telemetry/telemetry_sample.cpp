@@ -179,22 +179,7 @@ subscribeToData(Vehicle* vehicle, int responseTimeout)
     
     rcFuncFull = vehicle->subscribe->getValue<TOPIC_RC_FULL_RAW_DATA>();
     
-    printf("%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n",
-                 rcFuncFull.lb2.roll,
-                 rcFuncFull.lb2.pitch,
-                 rcFuncFull.lb2.yaw,
-                 rcFuncFull.lb2.throttle,
-                 rcFuncFull.lb2.mode,
-                 rcFuncFull.lb2.gear,
-                 rcFuncFull.lb2.camera,
-                 rcFuncFull.lb2.video,
-                 rcFuncFull.lb2.videoPause,
-                 rcFuncFull.lb2.goHome,
-                 rcFuncFull.lb2.leftWheel,
-                 rcFuncFull.lb2.rightWheelButton,
-                 rcFuncFull.lb2.rcC1,
-                 rcFuncFull.lb2.rcC2);
-
+    std::cout << "Left RC wheel =" << rcFullFunc.lb2.leftWheel << "\n";
     std::cout << "RC Commands           (r/p/y/thr)     = " << rc.roll << ", "
               << rc.pitch << ", " << rc.yaw << ", " << rc.throttle << "\n";
     
