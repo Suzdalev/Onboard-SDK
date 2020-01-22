@@ -179,7 +179,8 @@ subscribeToData(Vehicle* vehicle, int responseTimeout)
     
     rcFuncFull = vehicle->subscribe->getValue<TOPIC_RC_FULL_RAW_DATA>();
     
-    std::cout << "Left RC wheel =" << rcFullFunc.lb2.leftWheel << "\n";
+    
+    std::cout << "Left RC wheel =" << rcFuncFull.lb2.leftWheel << "\n";
     std::cout << "RC Commands           (r/p/y/thr)     = " << rc.roll << ", "
               << rc.pitch << ", " << rc.yaw << ", " << rc.throttle << "\n";
     
