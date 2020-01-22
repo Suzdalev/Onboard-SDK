@@ -140,7 +140,7 @@ subscribeToData(Vehicle* vehicle, int responseTimeout)
   // Package 2: Subscribe to RC Channel and Velocity at freq 50 Hz
   int     pkgIndex                  = 2;
   int     freq                      = 50;
-  TopicName topicList50Hz[] = { TOPIC_RC, TOPIC_VELOCITY };
+  TopicName topicList50Hz[] = { TOPIC_RC };
   int numTopic                  = sizeof(topicList50Hz) / sizeof(topicList50Hz[0]);
   bool enableTimestamp           = false;
 
@@ -165,9 +165,10 @@ subscribeToData(Vehicle* vehicle, int responseTimeout)
 
   // Get all the data once before the loop to initialize vars
  
-  TypeMap<TOPIC_ALTITUDE_FUSIONED>::type altitude;
+  
   TypeMap<TOPIC_RC>::type                rc;
-  TypeMap<TOPIC_VELOCITY>::type          velocity;
+  
+  TypeMap<TOPIC_RC_FULL_RAW_DATA>::type rcFuncFull;
   
 
   // Print in a loop for 2 sec
@@ -175,13 +176,28 @@ subscribeToData(Vehicle* vehicle, int responseTimeout)
   {
     
     rc           = vehicle->subscribe->getValue<TOPIC_RC>();
-    velocity     = vehicle->subscribe->getValue<TOPIC_VELOCITY>();
     
+    rcFuncFull = vehicle->subscribe->getValue<TOPIC_RC_FULL_RAW_DATA>();
     
+    printf("%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n",
+                 rcFuncFull.lb2.roll,
+                 rcFuncFull.lb2.pitch,
+                 rcFuncFull.lb2.yaw,
+                 rcFuncFull.lb2.throttle,
+                 rcFuncFull.lb2.mode,
+                 rcFuncFull.lb2.gear,
+                 rcFuncFull.lb2.camera,
+                 rcFuncFull.lb2.video,
+                 rcFuncFull.lb2.videoPause,
+                 rcFuncFull.lb2.goHome,
+                 rcFuncFull.lb2.leftWheel,
+                 rcFuncFull.lb2.rightWheelButton,
+                 rcFuncFull.lb2.rcC1,
+                 rcFuncFull.lb2.rcC2);
+
     std::cout << "RC Commands           (r/p/y/thr)     = " << rc.roll << ", "
               << rc.pitch << ", " << rc.yaw << ", " << rc.throttle << "\n";
-    std::cout << "Velocity              (vx,vy,vz)      = " << velocity.data.x
-              << ", " << velocity.data.y << ", " << velocity.data.z << "\n";
+    
     
     std::cout << "-------\n\n";
     usleep(50000);
