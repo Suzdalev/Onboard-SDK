@@ -11,6 +11,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: build
       run: mkdir build
+    - name: build cd
       run: cd build 
     - name: cmake ..
       run: cmake 
