@@ -140,7 +140,7 @@ subscribeToData(Vehicle* vehicle, int responseTimeout)
   // Package 2: Subscribe to RC Channel and Velocity at freq 50 Hz
   int     pkgIndex                  = 2;
   int     freq                      = 50;
-  TopicName topicList50Hz[] = { TOPIC_RC };
+  TopicName topicList50Hz[] = { TOPIC_RC, TOPIC_RC_FULL_RAW_DATA };
   int numTopic                  = sizeof(topicList50Hz) / sizeof(topicList50Hz[0]);
   bool enableTimestamp           = false;
 
