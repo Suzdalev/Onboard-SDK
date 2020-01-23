@@ -44,13 +44,13 @@ main(int argc, char** argv)
 
   // Setup OSDK.
   LinuxSetup linuxEnvironment(argc, argv);
-  Vehicle*   vehicle;
+
   
-      vehicle = linuxEnvironment.getVehicle();
+      Vehicle*   vehicle = linuxEnvironment.getVehicle();
       if (vehicle == NULL)
       {
         std::cout << "Vehicle not initialized, exiting.\n";
-        sleep(1);
+        return -1;
       }
   
 
