@@ -43,7 +43,7 @@ using namespace DJI::OSDK::Telemetry;
 bool
 subscribeToData(Vehicle* vehicle, int& channelGV)
 {
-  int responseTimeout = 1
+  int responseTimeout = 1;
   // We will subscribe to six kinds of data:
   // 1. Flight Status at 1 Hz
   // 2. Fused Lat/Lon at 10Hz
