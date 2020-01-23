@@ -53,7 +53,7 @@ main(int argc, char** argv)
 
 
 
-        subscribeToData(vehicle);
+        subscribeToData(vehicle, &channelGV);
      
 
   return 0;
