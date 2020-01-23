@@ -45,14 +45,14 @@ main(int argc, char** argv)
   // Setup OSDK.
   LinuxSetup linuxEnvironment(argc, argv);
   Vehicle*   vehicle;
-  do{
+  
       vehicle = linuxEnvironment.getVehicle();
       if (vehicle == NULL)
       {
         std::cout << "Vehicle not initialized, exiting.\n";
         sleep(1);
       }
-  }while(vehicle == NULL)
+  
 
         std::thread telemetry_thr(subscribeToData, vehicle, channelGV);
         telemetry_thr.detach();
