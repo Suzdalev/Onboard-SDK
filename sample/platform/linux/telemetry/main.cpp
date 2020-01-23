@@ -29,10 +29,15 @@
  */
 
 #include "telemetry_sample.hpp"
+#include <thread>
+
+
 
 using namespace DJI::OSDK;
 using namespace DJI::OSDK::Telemetry;
 
+
+int channelGV = 0;
 int
 main(int argc, char** argv)
 {
