@@ -91,7 +91,7 @@ subscribeToData(Vehicle* vehicle, int& channelGV)
 
 
   // Wait for the data to start coming in.
-  sleep(1)
+  sleep(1);
 
   // Get all the data once before the loop to initialize vars
  
