@@ -53,7 +53,7 @@ main(int argc, char** argv)
 
 
 
-   std::thread telemetry_thr(subscribeToData, vehicle, channelGV);
+   std::thread telemetry_thr(subscribeToData, vehicle, *channelGV);
   telemetry_thr.detach();
 
   while(true){
