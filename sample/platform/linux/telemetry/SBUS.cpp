@@ -27,7 +27,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 #include <errno.h>      // Error number definitions
 #include <inttypes.h>
 #include <asm/ioctls.h>
-#include <asm-generic/termbits.h>
+#include <asm/termbits.h>
 #include <sys/ioctl.h>
 
 #include "SBUS.hpp"
