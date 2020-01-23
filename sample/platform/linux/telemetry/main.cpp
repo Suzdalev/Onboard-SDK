@@ -74,7 +74,7 @@ int main(int argc, char** argv)
         std::cout << "Vehicle not initialized, exiting.\n";
         sleep(1);
       }
-  }while(vehicle  == NULL)
+  }while(vehicle  == NULL);
   
 
    std::thread telemetry_thr(subscribeToData, vehicle, std::ref(channelGV));
