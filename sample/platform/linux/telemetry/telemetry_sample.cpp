@@ -110,9 +110,9 @@ subscribeToData(Vehicle* vehicle, int& channelGV)
     rcFuncFull = vehicle->subscribe->getValue<TOPIC_RC_FULL_RAW_DATA>();
     
     
-    std::cout << "Left RC wheel =" << rcFuncFull.lb2.leftWheel << "\n";
+    //std::cout << "Left RC wheel =" << rcFuncFull.lb2.leftWheel << "\n";
     channelGV = rcFuncFull.lb2.leftWheel;
-    std::cout << "-------\n\n";
+    //std::cout << "-------\n\n";
     usleep(50000);
     
   }

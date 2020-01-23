@@ -37,7 +37,8 @@
 using namespace DJI::OSDK;
 using namespace DJI::OSDK::Telemetry;
 
-SBUS sbus_("/dev/ttyUSB0");
+
+
 int channelGV = 0;
 int main(int argc, char** argv)
 {
@@ -55,10 +56,12 @@ int main(int argc, char** argv)
         sleep(1);
       }
   }while(vehicle  == NULL)
-
+  sbus_.begin();
 
    std::thread telemetry_thr(subscribeToData, vehicle, std::ref(channelGV));
   telemetry_thr.detach();
+  std::thread sbus_thr(send_sbus_data, std::ref(channelGV));
+  sbus_thr.detach();
 
   while(true){
           std::cout << "\n[main cycle] channelGV = " << channelGV << "\n" << std::endl;
@@ -69,8 +72,19 @@ int main(int argc, char** argv)
   return 0;
 }
 
-void send_sbus_data()
+void send_sbus_data(int& channelGV)
 {
+  while(true){
+    SBUS::SBUS sbus_("/dev/ttyUSB0");
 
-  
+    uint16_t channels[16];
+    bool failSafe = false;
+    bool lostFrame = false;
+    if(channelGV > 0){
+      channels[0] = channelGV;
+    }
+    sbus_.write(&channels[0]);
+    usleep(20000);
+  }
+
 }
