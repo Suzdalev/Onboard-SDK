@@ -1,0 +1,7 @@
+#!/bin/bash
+
+git pull
+cd build/
+make
+cd bin/
+./djiosdk-telemetry-sample Userconfig.txt
