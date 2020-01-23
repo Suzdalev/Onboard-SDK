@@ -196,7 +196,7 @@ bool SBUS::read(uint16_t* channels, uint8_t* failsafe, uint16_t* lostFrame)
 
 /* parse the SBUS data */
 bool SBUS::parse()
-{
+{   /*
     #if !defined(__RASPBERRYPI_ZERO_W__)
         // reset the parser state if too much time has passed
         static elapsedMicros _sbusTime = 0;
@@ -233,7 +233,7 @@ bool SBUS::parse()
         }
         // return false if a partial packet
         return false;
-    #endif
+    #endif */
 }
 
 /* write SBUS packets */
