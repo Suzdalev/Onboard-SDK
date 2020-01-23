@@ -119,7 +119,7 @@ int SBUS::begin()
             cerr << "TCSETS2" << endl;
             return -1;
         }
-    #endif
+    
 
     return 0;
 }
