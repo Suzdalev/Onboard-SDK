@@ -30,7 +30,7 @@
 
 #include "telemetry_sample.hpp"
 #include <thread>
-#include "SBUS.hpp"
+#include "SBUS.cpp"
 
 
 
