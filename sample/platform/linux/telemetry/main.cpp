@@ -44,9 +44,9 @@ main(int argc, char** argv)
 
   // Setup OSDK.
   LinuxSetup linuxEnvironment(argc, argv);
-
+  Vehicle*   vehicle;
   do{
-      Vehicle*   vehicle = linuxEnvironment.getVehicle();
+      vehicle = linuxEnvironment.getVehicle();
       if (vehicle == NULL)
       {
         std::cout << "Vehicle not initialized, exiting.\n";
