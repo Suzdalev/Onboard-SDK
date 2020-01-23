@@ -30,7 +30,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 #include <asm/termbits.h>
 #include <sys/ioctl.h>
 
-#include "SBUS.h"
+#include "SBUS.hpp"
 
 using namespace std;
 
@@ -88,7 +88,7 @@ int SBUS::begin()
         _bus->begin(_sbusBaud,SERIAL_SBUS);
     #elif defined(_BOARD_MAPLE_MINI_H_) // Maple Mini
         _bus->begin(_sbusBaud,SERIAL_8E2);
-    #elif defined(__RASPBERRYPI_ZERO_W__)
+    #else 
         // open file descriptor
         _fd = open(_tty.c_str(), O_RDWR| O_NOCTTY);
 

@@ -30,27 +30,31 @@
 
 #include "telemetry_sample.hpp"
 #include <thread>
+#include "SBUS.hpp"
 
 
 
 using namespace DJI::OSDK;
 using namespace DJI::OSDK::Telemetry;
 
-
+SBUS sbus_("/dev/ttyUSB0");
 int channelGV = 0;
-int
-main(int argc, char** argv)
+int main(int argc, char** argv)
 {
 
   // Setup OSDK.
   LinuxSetup linuxEnvironment(argc, argv);
-  Vehicle*   vehicle = linuxEnvironment.getVehicle();
-  if (vehicle == NULL)
-  {
-    std::cout << "Vehicle not initialized, exiting.\n";
-    return -1;
-  }
+  Vehicle*   vehicle = NULL;
 
+  do{
+
+      vehicle = linuxEnvironment.getVehicle();
+      if (vehicle == NULL)
+      {
+        std::cout << "Vehicle not initialized, exiting.\n";
+        sleep(1);
+      }
+  }while(vehicle  == NULL)
 
 
    std::thread telemetry_thr(subscribeToData, vehicle, std::ref(channelGV));
@@ -58,8 +62,15 @@ main(int argc, char** argv)
 
   while(true){
           std::cout << "\n[main cycle] channelGV = " << channelGV << "\n" << std::endl;
+          usleep(100000);
   }
      
 
   return 0;
+}
+
+void send_sbus_data()
+{
+
+  
 }
