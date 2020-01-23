@@ -77,7 +77,7 @@ int SBUS::begin()
     {
         setEndPoints(i, _defaultMin, _defaultMax);
     }
-
+    /*
     // begin the serial port for SBUS
     #if defined(__MK20DX128__) || defined(__MK20DX256__)  // Teensy 3.0 || Teensy 3.1/3.2
         _bus->begin(_sbusBaud,SERIAL_8E1_RXINV_TXINV);
@@ -88,7 +88,7 @@ int SBUS::begin()
         _bus->begin(_sbusBaud,SERIAL_SBUS);
     #elif defined(_BOARD_MAPLE_MINI_H_) // Maple Mini
         _bus->begin(_sbusBaud,SERIAL_8E2);
-    #else 
+    #else  */
         // open file descriptor
         _fd = open(_tty.c_str(), O_RDWR| O_NOCTTY);
 
