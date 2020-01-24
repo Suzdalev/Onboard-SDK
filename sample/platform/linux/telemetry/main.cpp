@@ -67,11 +67,11 @@ int main(int argc, char** argv)
 {
 
   // Setup OSDK.
-  
+  LinuxSetup linuxEnvironment(argc, argv);
   Vehicle*   vehicle = NULL;
 
   do{
-      LinuxSetup linuxEnvironment(argc, argv);
+
       vehicle = linuxEnvironment.getVehicle();
       if (vehicle == NULL)
       {
