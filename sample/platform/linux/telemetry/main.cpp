@@ -48,10 +48,14 @@ void send_sbus_data(int& channelGV)
     SBUS::SBUS sbus_("/dev/ttyUSB0");
     sbus_.begin();
     uint16_t channels[16];
+    for (int i=0; i<16; i++){
+      channels[i] = 992;
+    }
+
     bool failSafe = false;
     bool lostFrame = false;
     if(channelGV > 0){
-      channels[0] = channelGV;
+      channels[0] = channelGV - 34;
     }
     sbus_.write(&channels[0]);
     usleep(20000);
