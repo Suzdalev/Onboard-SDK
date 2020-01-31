@@ -35,7 +35,7 @@
 
 using namespace DJI::OSDK;
 using namespace DJI::OSDK::Telemetry;
-using namespace GPIO;
+
 
 
 int channelGV = 0;
