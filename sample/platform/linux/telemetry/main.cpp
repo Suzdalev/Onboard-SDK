@@ -36,7 +36,7 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <unistd.h>
-#define PIN 1
+#define PIN RPI_GPIO_P1_1
 
 
 using namespace DJI::OSDK;
@@ -52,9 +52,9 @@ void send_control(int& channelGV)
   
   while(true){
    
-    bcm2835_gpio_write(PIN, HIGH);
+    bcm2835_gpio_write(PIN, 1);
     usleep(channelGV+476);
-    bcm2835_gpio_write(PIN, LOW);
+    bcm2835_gpio_write(PIN, 0);
     usleep(20000);
   }
 
