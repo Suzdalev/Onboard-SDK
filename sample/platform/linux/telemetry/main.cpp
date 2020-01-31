@@ -47,7 +47,7 @@ void send_control(int& channelGV)
 {
   while(true){
     GPIO::DigitalOut out(1);
-    out.on(1000*(channelGV+476));
+    GPIO::DigitallOut::out.on(1000*(channelGV+476));
     usleep(20000);
   }
 
