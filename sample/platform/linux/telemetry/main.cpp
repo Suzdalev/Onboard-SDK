@@ -30,7 +30,8 @@
 
 #include "telemetry_sample.hpp"
 #include <thread>
-#include "SBUS.cpp"
+//#include "SBUS.cpp"
+#include "cppgpio.hpp"
 
 
 
@@ -42,22 +43,11 @@ using namespace DJI::OSDK::Telemetry;
 int channelGV = 0;
 
 
-void send_sbus_data(int& channelGV)
+void send_control(int& channelGV)
 {
   while(true){
-    SBUS::SBUS sbus_("/dev/ttyUSB0");
-    sbus_.begin();
-    uint16_t channels[16];
-    for (int i=0; i<16; i++){
-      channels[i] = 992;
-    }
-
-    bool failSafe = false;
-    bool lostFrame = false;
-    if(channelGV > 0){
-      channels[0] = channelGV - 34;
-    }
-    sbus_.write(&channels[0]);
+    GPIO::DigitalOut out(1);
+    out.on(1000*(channelGV+476));
     usleep(20000);
   }
 
@@ -83,7 +73,7 @@ int main(int argc, char** argv)
 
    std::thread telemetry_thr(subscribeToData, vehicle, std::ref(channelGV));
   telemetry_thr.detach();
-  std::thread sbus_thr(send_sbus_data, std::ref(channelGV));
+  std::thread sbus_thr(send_control, std::ref(channelGV));
   sbus_thr.detach();
 
   while(true){
