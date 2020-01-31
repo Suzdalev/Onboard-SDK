@@ -31,7 +31,7 @@
 #include "telemetry_sample.hpp"
 #include <thread>
 //#include "SBUS.cpp"
-#include "cppgpio.hpp"
+#include <cppgpio.hpp>
 
 
 
