@@ -28,7 +28,7 @@
 #define output_hpp_SILJGLSDKHGZJSDVJSDVHBJSDZVBSDKVBHKSDHBV
 
 #include <chrono>
-#include "cppgpio/gpio.hpp"
+#include "./cppgpio/gpio.hpp"
 
 namespace GPIO {
 
