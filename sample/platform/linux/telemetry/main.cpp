@@ -37,7 +37,7 @@
 
 using namespace DJI::OSDK;
 using namespace DJI::OSDK::Telemetry;
-
+using namespace GPIO;
 
 
 int channelGV = 0;
@@ -46,7 +46,7 @@ int channelGV = 0;
 void send_control(int& channelGV)
 {
 
-   GPIO::DigitalOut outPIN(1);
+   DigitalOut outPIN(1);
   while(true){
    
     outPIN.on(std::chrono::nanoseconds(1000*(channelGV+476)));
