@@ -28,7 +28,7 @@
 #include <vector>
 #include <memory>
 
-#include <cppgpio/gpio.hpp>
+#include "gpio.hpp"
 #include "tools.hpp"
 
 #if __cplusplus <= 201103L
