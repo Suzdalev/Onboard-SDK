@@ -36,6 +36,7 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <unistd.h>
+#include <bcm2835.h>
 #define PIN RPI_GPIO_P1_1
 
 
@@ -52,9 +53,9 @@ void send_control(int& channelGV)
   
   while(true){
    
-    bcm2835_gpio_write(PIN, 1);
+    bcm2835_gpio_write(PIN, HIGH);
     usleep(channelGV+476);
-    bcm2835_gpio_write(PIN, 0);
+    bcm2835_gpio_write(PIN, LOW);
     usleep(20000);
   }
 
