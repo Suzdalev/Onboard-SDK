@@ -30,11 +30,13 @@
 
 #include "telemetry_sample.hpp"
 #include <thread>
+#include <iostream>
 #include <wiringPi.h>
 
 
 using namespace DJI::OSDK;
 using namespace DJI::OSDK::Telemetry;
+using namespace std;
 
 
 
