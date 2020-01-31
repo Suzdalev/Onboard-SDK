@@ -45,8 +45,10 @@ int channelGV = 0;
 
 void send_control(int& channelGV)
 {
+
+   GPIO::DigitalOut out(1);
   while(true){
-    GPIO::DigitalOut out(1);
+   
     GPIO::DigitallOut::out.on(std::chrono::nanoseconds(1000*(channelGV+476)));
     usleep(20000);
   }
