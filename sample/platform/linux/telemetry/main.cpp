@@ -30,9 +30,7 @@
 
 #include "telemetry_sample.hpp"
 #include <thread>
-//#include "SBUS.cpp"
-#include "cppgpio.hpp"
-
+#include <wiringPi.h>
 
 
 using namespace DJI::OSDK;
@@ -45,11 +43,13 @@ int channelGV = 0;
 
 void send_control(int& channelGV)
 {
-
-   DigitalOut outPIN(1);
+  wiringPiSetup();
+   pinMode(1, OUTPUT);
   while(true){
    
-    outPIN.on(std::chrono::nanoseconds(1000*(channelGV+476)));
+    digitalWrite(1, HIGH);
+    usleep(channelGV+476);
+    digitalWrite(1, LOW);
     usleep(20000);
   }
 
