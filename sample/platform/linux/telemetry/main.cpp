@@ -37,7 +37,7 @@
 #include <sys/mman.h>
 #include <unistd.h>
 #include <bcm2835.h>
-#define PIN RPI_GPIO_P1_12
+#define PIN RPI_GPIO_P1_07
 
 
 using namespace DJI::OSDK;
@@ -90,6 +90,6 @@ int main(int argc, char** argv)
           usleep(100000);
   }
      
-
+  bcm2835_close();
   return 0;
 }
