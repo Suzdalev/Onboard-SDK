@@ -41,4 +41,4 @@ FILE(GLOB SOURCE_FILES *.hpp *.cpp
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} djiosdk-core)
-target_link_libraries(${PROJECT_NAME} lbcm2835)
+target_link_libraries(${PROJECT_NAME} bcm2835)
