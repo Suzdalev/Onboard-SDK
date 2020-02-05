@@ -38,7 +38,8 @@
 #include <unistd.h>
 #include <bcm2835.h>
 #define PIN RPI_GPIO_P1_07
-#define PWM_shift 447
+#define PWM_shift 1500
+#define CONTROL_MULTIPLIER 0.8
 
 
 using namespace DJI::OSDK;
@@ -55,7 +56,7 @@ void send_control(int& channelGV)
   while(true){
    
     bcm2835_gpio_write(PIN, HIGH);
-    usleep(channelGV+PWM_shift);
+    usleep((channelGV-1024)*CONTROL_MULTIPLIER+PWM_shift);
     bcm2835_gpio_write(PIN, LOW);
     usleep(20000);
   }
