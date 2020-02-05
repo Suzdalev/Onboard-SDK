@@ -24,7 +24,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(djiosdk-telemetry-sample)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread -g -O0 -L ")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread -g -O3 -L ")
 
 include_directories(${ONBOARDSDK_SOURCE}/api/inc)
 include_directories(${ONBOARDSDK_SOURCE}/utility/inc)

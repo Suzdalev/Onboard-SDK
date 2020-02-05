@@ -38,6 +38,7 @@
 #include <unistd.h>
 #include <bcm2835.h>
 #define PIN RPI_GPIO_P1_07
+#define PWM_shift 467
 
 
 using namespace DJI::OSDK;
@@ -54,7 +55,7 @@ void send_control(int& channelGV)
   while(true){
    
     bcm2835_gpio_write(PIN, HIGH);
-    usleep(channelGV+476);
+    usleep(channelGV+PWM_shift);
     bcm2835_gpio_write(PIN, LOW);
     usleep(20000);
   }
@@ -87,6 +88,7 @@ int main(int argc, char** argv)
 
   while(true){
           std::cout << "\n[main cycle] channelGV = " << channelGV << "\n" << std::endl;
+          std::cout << "\n[main cycle] PWM = " << channelGV + PWM_shift << "\n" << std::endl;
           usleep(100000);
   }
      
