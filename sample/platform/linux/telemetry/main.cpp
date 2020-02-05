@@ -85,14 +85,14 @@ int main(int argc, char** argv)
    std::thread telemetry_thr(subscribeToData, vehicle, std::ref(channelGV));
   telemetry_thr.detach();
   std::thread sbus_thr(send_control, std::ref(channelGV));
-  //sbus_thr.detach();
-  /*
+  sbus_thr.detach();
+  
   while(true){
           std::cout << "\n[main cycle] channelGV = " << channelGV << "\n" << std::endl;
           std::cout << "\n[main cycle] PWM = " << channelGV + PWM_shift << "\n" << std::endl;
           usleep(100000);
   }
-    */ 
+     
   bcm2835_close();
   return 0;
 }
