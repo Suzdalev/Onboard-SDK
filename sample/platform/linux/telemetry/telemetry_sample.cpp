@@ -41,7 +41,7 @@ using namespace DJI::OSDK::Telemetry;
 
 
 bool
-subscribeToData(Vehicle* vehicle, int& channelGV)
+subscribeToData(Vehicle* vehicle, int& pitchGV, int& rwbGV, int& btnC1GV, int& btnC2GV)
 {
   int responseTimeout = 1;
   // We will subscribe to six kinds of data:
@@ -111,7 +111,10 @@ subscribeToData(Vehicle* vehicle, int& channelGV)
     
     
     //std::cout << "Left RC wheel =" << rcFuncFull.lb2.leftWheel << "\n";
-    channelGV = rcFuncFull.lb2.leftWheel;
+    pitchGV = rcFuncFull.lb2.leftWheel;
+    rwbGV = rcFuncFull.lb2.rightWheelButton;
+    btnC1GV = rcFuncFull.lb2.rcC1;
+    btnC2GV = rcFuncFull.lb2.rcC2;
     //std::cout << "-------\n\n";
     usleep(50000);
     

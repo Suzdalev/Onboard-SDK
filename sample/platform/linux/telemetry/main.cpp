@@ -38,7 +38,8 @@
 #include <unistd.h>
 #include <bcm2835.h>
 #define PIN RPI_GPIO_P1_07
-#define PWM_shift 1331
+#define PITCH_CAL 0
+#define YAW_CAL 0
 #define CONTROL_MULTIPLIER 0.8
 
 
@@ -48,17 +49,39 @@ using namespace DJI::OSDK::Telemetry;
 
 
 
-int channelGV = 0;
+int pitchGV = 1024;
+int rwbGV = 1024;
+int btnC1GV = 1024;
+int btnC2GV = 1024;
 
-void send_control(int& channelGV)
+void PPMpulse(){
+  bcm2835_gpio_write(PIN, HIGH);
+  usleep(500);
+  bcm2835_gpio_write(PIN, LOW);
+}
+int Btn(int& btn){
+  if(btn>1100) return 1;
+  return 0;
+}
+void send_control(int& pitchGV, int& rwbGV, int& btnC1GV, int& btnC2GV)
 {
   
   while(true){
    
-    bcm2835_gpio_write(PIN, HIGH);
-    usleep((channelGV-1024)*CONTROL_MULTIPLIER+PWM_shift);
-    bcm2835_gpio_write(PIN, LOW);
-    usleep(20000);
+    PPMpulse();
+    usleep(pitchGV+PITCH_CAL-24); //pitch <- wheel
+    PPMpulse();
+    if(Btn(rwbGV)){  //rwb pressed
+      usleep(1000); // yaw 1500
+      PPMpulse();
+      usleep(1400); // CMD HIGH ~1900
+    } else {
+      usleep(1000+YAW_CAL-450*Btn(btnC1GV)+450*Btn(btnC2GV)); // 1500 + cali -450*(0|1) + 450*(0|1) <<<< yaw
+      PPMpulse();
+      usleep(600); //CMD LOW ~1100
+    }
+    PPMpulse();
+    usleep(16000);
   }
 
 }
@@ -82,15 +105,15 @@ int main(int argc, char** argv)
   }while(vehicle  == NULL);
   
 
-   std::thread telemetry_thr(subscribeToData, vehicle, std::ref(channelGV));
+   std::thread telemetry_thr(subscribeToData, vehicle, std::ref(pitchGV), std::ref(rwbGV), std::ref(btnC1GV), std::ref(btnC2GV));
   telemetry_thr.detach();
-  std::thread sbus_thr(send_control, std::ref(channelGV));
-  sbus_thr.detach();
+  std::thread control_thr(send_control, std::ref(pitchGV), std::ref(rwbGV), std::ref(btnC1GV), std::ref(btnC2GV));
+  control_thr.detach();
   
   while(true){
-          std::cout << "\n[main cycle] channelGV = " << channelGV << "\n" << std::endl;
-          std::cout << "\n[main cycle] PWM = " << channelGV + PWM_shift << "\n" << std::endl;
-          usleep(100000);
+          std::cout << "\n[main cycle] pitchGV = " << pitchGV << "\n" << std::endl;
+          std::cout << "\n[main cycle] PWM = " << pitchGV + PITCH_CAL << "\n" << std::endl;
+          usleep(10000000);
   }
      
   bcm2835_close();
