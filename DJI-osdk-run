@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-cd build/
+cd /home/dietpi/modified-osdk/Onboard-SDK/build/bin
 
-cd bin/
+
 sudo ./djiosdk-telemetry-sample Userconfig.txt
