@@ -90,14 +90,15 @@ int main(int argc, char** argv)
 {
 
   // Setup OSDK.
+  std::cout << "\nwait 5 sec before vehicle init \n";
+  sleep(5);
+  std::cout << "\n start init\n";
   LinuxSetup linuxEnvironment(argc, argv);
   Vehicle*   vehicle = NULL;
   bcm2835_init();
   bcm2835_gpio_fsel(PIN, BCM2835_GPIO_FSEL_OUTP);
   do{ 
-      std::cout << "\nwait 5 sec before vehicle init \n";
-      sleep(5);
-      std::cout << "\n start init\n";
+      
       vehicle = linuxEnvironment.getVehicle();
       if (vehicle == NULL)
       {
