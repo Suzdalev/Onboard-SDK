@@ -91,7 +91,7 @@ subscribeToData(Vehicle* vehicle, int& pitchGV, int& rwbGV, int& btnC1GV, int& b
 
 
   // Wait for the data to start coming in.
-  usleep(10000);
+  sleep(1);
 
   // Get all the data once before the loop to initialize vars
  
