@@ -39,7 +39,7 @@
 #include <bcm2835.h>
 #define PIN RPI_GPIO_P1_07
 #define PITCH_CAL 0
-#define YAW_CAL 0
+#define YAW_CAL -90
 #define CONTROL_MULTIPLIER 0.8
 
 
