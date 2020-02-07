@@ -94,8 +94,9 @@ int main(int argc, char** argv)
   Vehicle*   vehicle = NULL;
   bcm2835_init();
   bcm2835_gpio_fsel(PIN, BCM2835_GPIO_FSEL_OUTP);
-  do{
-
+  do{ 
+      std::cout << "wait 5 sec before vehicle init \n";
+      sleep(5);
       vehicle = linuxEnvironment.getVehicle();
       if (vehicle == NULL)
       {
