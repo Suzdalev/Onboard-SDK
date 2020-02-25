@@ -66,7 +66,7 @@ int Btn(int& btn){
 }
 void send_control(int& pitchGV, int& rwbGV, int& btnC1GV, int& btnC2GV, int& camGV)
 {
-  string buffer = "";
+  std::string buffer = "";
   while(true){
    buffer = "p" + to_string(pitchGV + 476 + PITCH_CAL);
    bcm2835_i2c_write((char*)buffer, buffer.length());
