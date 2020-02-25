@@ -99,6 +99,7 @@ int main(int argc, char** argv)
   Vehicle*   vehicle = NULL;
   bcm2835_init();
   bcm2835_i2c_begin();
+  bcm2835_i2c_setClockDivider(BCM2835_I2C_CLOCK_DIVIDER_2500);
   bcm2835_i2c_setSlaveAddress(0x04);
   do{ 
       
