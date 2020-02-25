@@ -115,7 +115,7 @@ int main(int argc, char** argv)
   
   while(true){
           std::cout << "\n[main cycle] pitchGV = " << pitchGV << "\n" << std::endl;
-          std::cout << "\n[main cycle] PWM = " << pitchGV + PITCH_CAL << "\n" << std::endl;
+          std::cout << "\n[main cycle] PWM = " << pitchGV + PITCH_CAL -24  << "\n" << std::endl;
           usleep(10000000);
   }
      
