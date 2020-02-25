@@ -96,7 +96,7 @@ int main(int argc, char** argv)
   LinuxSetup linuxEnvironment(argc, argv);
   Vehicle*   vehicle = NULL;
   bcm2835_init();
-  bcm2835_gpio_fsel(PIN, BCM2835_GPIO_FSEL_OUTP);
+  bcm2835_gpio_fsel(PIN, BCM2835_GPIO_FSEL_OUTP); //test new branch
   do{ 
       
       vehicle = linuxEnvironment.getVehicle();
