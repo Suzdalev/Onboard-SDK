@@ -53,6 +53,7 @@ int pitchGV = 1024;
 int rwbGV = 1024;
 int btnC1GV = 1024;
 int btnC2GV = 1024;
+int camGV = 1024;
 
 void PPMpulse(){
   bcm2835_gpio_write(PIN, HIGH);
@@ -63,25 +64,26 @@ int Btn(int& btn){
   if(btn>1100) return 1;
   return 0;
 }
-void send_control(int& pitchGV, int& rwbGV, int& btnC1GV, int& btnC2GV)
+void send_control(int& pitchGV, int& rwbGV, int& btnC1GV, int& btnC2GV, int& camGV)
 {
-  
+  string buffer = "";
   while(true){
+   buffer = "p" + to_string(pitchGV + 476 + PITCH_CAL);
+   bcm2835_i2c_write((char*)buffer, buffer.length());
+   usleep(100);
    
-    PPMpulse();
-    usleep(pitchGV+PITCH_CAL-24); //pitch <- wheel
-    PPMpulse();
-    if(Btn(rwbGV)){  //rwb pressed
-      usleep(1000); // yaw 1500
-      PPMpulse();
-      usleep(1400); // CMD HIGH ~1900
-    } else {
-      usleep(1000+YAW_CAL-450*Btn(btnC1GV)+450*Btn(btnC2GV)); // 1500 + cali -450*(0|1) + 450*(0|1) <<<< yaw
-      PPMpulse();
-      usleep(600); //CMD LOW ~1100
-    }
-    PPMpulse();
-    usleep(16000);
+   buffer = "y" + to_string(1500 - 400*(btnC1GV-364)/1320 +  400*(btnC2GV-364)/1320 +YAW_CAL);
+   bcm2835_i2c_write((char*)buffer, buffer.length());
+   usleep(100);
+   
+   buffer = "r" + to_string(1100 + 800*(rwbGV - 364)/1320);
+   bcm2835_i2c_write((char*)buffer, buffer.length());
+   usleep(100);
+   
+   buffer = "z" + to_string(1100 + 800*(camGV - 364)/1320);
+   bcm2835_i2c_write((char*)buffer, buffer.length());
+   usleep(100);
+   
   }
 
 }
@@ -96,7 +98,8 @@ int main(int argc, char** argv)
   LinuxSetup linuxEnvironment(argc, argv);
   Vehicle*   vehicle = NULL;
   bcm2835_init();
-  bcm2835_gpio_fsel(PIN, BCM2835_GPIO_FSEL_OUTP); //test new branch
+  bcm2835_i2c_begin();
+  bcm2835_i2c_setSlaveAddress(0x04);
   do{ 
       
       vehicle = linuxEnvironment.getVehicle();
@@ -108,9 +111,9 @@ int main(int argc, char** argv)
   }while(vehicle  == NULL);
   
 
-   std::thread telemetry_thr(subscribeToData, vehicle, std::ref(pitchGV), std::ref(rwbGV), std::ref(btnC1GV), std::ref(btnC2GV));
+   std::thread telemetry_thr(subscribeToData, vehicle, std::ref(pitchGV), std::ref(rwbGV), std::ref(btnC1GV), std::ref(btnC2GV), std::ref(camGV));
   telemetry_thr.detach();
-  std::thread control_thr(send_control, std::ref(pitchGV), std::ref(rwbGV), std::ref(btnC1GV), std::ref(btnC2GV));
+  std::thread control_thr(send_control, std::ref(pitchGV), std::ref(rwbGV), std::ref(btnC1GV), std::ref(btnC2GV), std::ref(camGV));
   control_thr.detach();
   
   while(true){

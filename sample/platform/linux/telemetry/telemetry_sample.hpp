@@ -40,7 +40,7 @@
 // Helpers
 #include <dji_linux_helpers.hpp>
 
-bool subscribeToData(DJI::OSDK::Vehicle* vehiclePtr, int& pitchGV, int& rwbGV, int& btnC1GV, int& btnC2GV);
+bool subscribeToData(DJI::OSDK::Vehicle* vehiclePtr, int& pitchGV, int& rwbGV, int& btnC1GV, int& btnC2GV, int& camGV);
 
 
 #endif // DJIOSDK_TELEMETRYSAMPLE_HPP
