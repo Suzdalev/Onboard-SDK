@@ -39,7 +39,7 @@
 #include <bcm2835.h>
 #define PIN RPI_GPIO_P1_07
 #define PITCH_CAL 0
-#define YAW_CAL -90
+#define YAW_CAL 0
 #define CONTROL_MULTIPLIER 0.8
 
 
@@ -68,19 +68,19 @@ void send_control(int& pitchGV, int& rwbGV, int& btnC1GV, int& btnC2GV, int& cam
 {
   std::string buffer = "";
   while(true){
-   buffer = "p" + std::to_string(pitchGV + 476 + PITCH_CAL);
+   buffer = "p" + std::to_string(pitchGV -32 + PITCH_CAL);
    bcm2835_i2c_write(buffer.c_str(), buffer.length());
    usleep(100);
    
-   buffer = "y" + std::to_string(1500 - 400*(btnC1GV-364)/1320 +  400*(btnC2GV-364)/1320 +YAW_CAL);
+   buffer = "y" + std::to_string(992 - 400*(btnC1GV-364)/1320 +  400*(btnC2GV-364)/1320 +YAW_CAL);
    bcm2835_i2c_write(buffer.c_str(), buffer.length());
    usleep(100);
    
-   buffer = "r" + std::to_string(1100 + 800*(rwbGV - 364)/1320);
+   buffer = "r" + std::to_string(rwbGV);
    bcm2835_i2c_write(buffer.c_str(), buffer.length());
    usleep(100);
    
-   buffer = "z" + std::to_string(1100 + 800*(camGV - 364)/1320);
+   buffer = "z" + std::to_string(camGV);
    bcm2835_i2c_write(buffer.c_str(), buffer.length());
    usleep(100);
    
