@@ -70,19 +70,19 @@ void send_control(int& pitchGV, int& rwbGV, int& btnC1GV, int& btnC2GV, int& cam
   while(true){
    buffer = "p" + std::to_string(pitchGV -32 + PITCH_CAL);
    bcm2835_i2c_write(buffer.c_str(), buffer.length());
-   usleep(100);
+   usleep(150);
    
    buffer = "y" + std::to_string(992 - 400*(btnC1GV-364)/1320 +  400*(btnC2GV-364)/1320 +YAW_CAL);
    bcm2835_i2c_write(buffer.c_str(), buffer.length());
-   usleep(100);
+   usleep(150);
    
    buffer = "r" + std::to_string(rwbGV);
    bcm2835_i2c_write(buffer.c_str(), buffer.length());
-   usleep(100);
+   usleep(150);
    
    buffer = "z" + std::to_string(camGV);
    bcm2835_i2c_write(buffer.c_str(), buffer.length());
-   usleep(100);
+   usleep(150);
    
   }
 
@@ -101,7 +101,7 @@ int main(int argc, char** argv)
   bcm2835_i2c_begin();
   bcm2835_i2c_setClockDivider(BCM2835_I2C_CLOCK_DIVIDER_2500);
   bcm2835_i2c_setSlaveAddress(0x04);
-  do{ 
+ // do{ 
       
       vehicle = linuxEnvironment.getVehicle();
       if (vehicle == NULL)
@@ -109,7 +109,7 @@ int main(int argc, char** argv)
         std::cout << "Vehicle not initialized, exiting.\n";
         sleep(1);
       }
-  }while(vehicle  == NULL);
+  //}while(vehicle  == NULL);
   
 
    std::thread telemetry_thr(subscribeToData, vehicle, std::ref(pitchGV), std::ref(rwbGV), std::ref(btnC1GV), std::ref(btnC2GV), std::ref(camGV));
