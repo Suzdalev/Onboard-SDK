@@ -92,8 +92,8 @@ int main(int argc, char** argv)
 {
 
   // Setup OSDK.
-  std::cout << "\nwait 5 sec before vehicle init \n";
-  usleep(5000000);
+  //std::cout << "\nwait 5 sec before vehicle init \n";
+  //usleep(5000000);
   std::cout << "\n start init\n";
   LinuxSetup linuxEnvironment(argc, argv);
   Vehicle*   vehicle = NULL;
