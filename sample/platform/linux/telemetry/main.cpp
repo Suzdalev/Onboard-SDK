@@ -115,14 +115,14 @@ int main(int argc, char** argv)
    std::thread telemetry_thr(subscribeToData, vehicle, std::ref(pitchGV), std::ref(rwbGV), std::ref(btnC1GV), std::ref(btnC2GV), std::ref(camGV));
   telemetry_thr.detach();
   std::thread control_thr(send_control, std::ref(pitchGV), std::ref(rwbGV), std::ref(btnC1GV), std::ref(btnC2GV), std::ref(camGV));
-  control_thr.detach();
-  
+  //control_thr.detach();
+  /*
   while(true){
           std::cout << "\n[main cycle] pitchGV = " << pitchGV << "\n" << std::endl;
           std::cout << "\n[main cycle] PWM = " << pitchGV + PITCH_CAL -24  << "\n" << std::endl;
           usleep(10000000);
   }
-     
+     */
   bcm2835_close();
   return 0;
 }
