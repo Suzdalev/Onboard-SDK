@@ -93,18 +93,18 @@ int main(int argc, char** argv)
 
   // Setup OSDK.
   //std::cout << "\nwait 5 sec before vehicle init \n";
-  sleep(4);
+  //sleep(4);
   std::cout << "\n start init\n";
   LinuxSetup linuxEnvironment(argc, argv);
-  sleep(3);
-  Vehicle*   vehicle = NULL;
+  //sleep(3);
+  //Vehicle*   vehicle = NULL;
   bcm2835_init();
   bcm2835_i2c_begin();
   bcm2835_i2c_setClockDivider(BCM2835_I2C_CLOCK_DIVIDER_2500);
   bcm2835_i2c_setSlaveAddress(0x04);
  // do{ 
       
-      vehicle = linuxEnvironment.getVehicle();
+      Vehicle* vehicle = linuxEnvironment.getVehicle();
       if (vehicle == NULL)
       {
         std::cout << "Vehicle not initialized, exiting.\n";
