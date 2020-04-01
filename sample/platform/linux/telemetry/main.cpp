@@ -93,10 +93,10 @@ int main(int argc, char** argv)
 
   // Setup OSDK.
   //std::cout << "\nwait 5 sec before vehicle init \n";
-  sleep(2);
+  sleep(4);
   std::cout << "\n start init\n";
   LinuxSetup linuxEnvironment(argc, argv);
-  sleep(1);
+  sleep(3);
   Vehicle*   vehicle = NULL;
   bcm2835_init();
   bcm2835_i2c_begin();
