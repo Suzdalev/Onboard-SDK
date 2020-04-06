@@ -112,10 +112,10 @@ subscribeToData(Vehicle* vehicle, int& pitchGV, int& rwbGV, int& btnC1GV, int& b
     
     //std::cout << "Left RC wheel =" << rcFuncFull.lb2.leftWheel << "\n";
     pitchGV = rcFuncFull.lb2.leftWheel;
-    rwbGV = rcFuncFull.lb2.rightWheelButton;
-    btnC1GV = rcFuncFull.lb2.rcC1;
-    btnC2GV = rcFuncFull.lb2.rcC2;
-    camGV = rcFuncFull.lb2.camera;
+    rwbGV = rcFuncFull.lb2.rightWheelButton+100;
+    btnC1GV = rcFuncFull.lb2.rcC1+100;
+    btnC2GV = rcFuncFull.lb2.rcC2+100;
+    camGV = rcFuncFull.lb2.camera+100;
     //std::cout << "-------\n\n";
     usleep(50000);
     
