@@ -70,19 +70,19 @@ void send_control(int& pitchGV, int& rwbGV, int& btnC1GV, int& btnC2GV, int& cam
   while(true){
    buffer = "p" + std::to_string(pitchGV -32 + PITCH_CAL);
    bcm2835_i2c_write(buffer.c_str(), buffer.length());
-   usleep(150);
+   usleep(1000);
    
    buffer = "y" + std::to_string(992 - 400*(btnC1GV-364)/1320 +  400*(btnC2GV-364)/1320 +YAW_CAL);
    bcm2835_i2c_write(buffer.c_str(), buffer.length());
-   usleep(150);
+   usleep(1000);
    
    buffer = "r" + std::to_string(rwbGV);
    bcm2835_i2c_write(buffer.c_str(), buffer.length());
-   usleep(150);
+   usleep(1000);
    
    buffer = "z" + std::to_string(camGV);
    bcm2835_i2c_write(buffer.c_str(), buffer.length());
-   usleep(150);
+   usleep(1000);
    
   }
 
