@@ -81,8 +81,8 @@ void send_control(int& pitchGV, int& rwbGV, int& btnC1GV, int& btnC2GV, int& cam
    usleep(1000);
    
 
-   if(camGV < 1010){   //sbus center value of 1500pwm
-     camGV = 1010;
+   if(camGV < 1024){   //sbus center value of 1500pwm
+     camGV = 1024;
    }
    buffer = "z" + std::to_string(camGV);
    bcm2835_i2c_write(buffer.c_str(), buffer.length());
